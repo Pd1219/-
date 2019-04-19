@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            width: 500px;height: 500px;
+            border: 1px solid #f80;
+        }
+        .w1{
+            width: 20px;height: 20px;
+            background: rgba(172, 163, 163, 0.933);
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+     <div  class="w1"></div>
+     <script>
+        let body = document.querySelector(`body`)
+     let w1 = document.querySelector(`.w1`)
+      body.onmousemove = (ev)=>{
+         let event = ev || window.event
+        w1.style.left = event.pageX+`px`
+        w1.style.top = event.pageY+`px`
+       }
+     </script>
+</body>
+</html>

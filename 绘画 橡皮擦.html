@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #can{
+            border: 1px solid #f80;
+        }
+        ul{
+            list-style: none;
+            /* text-align: center; */
+            position: absolute;
+            top:0;
+            left: 510px;
+        }
+        li{ display: block;
+            width: 50px;height: 50px;
+            margin-bottom: 10px;
+        }
+      li:nth-of-type(1){
+          background: red
+      }
+      li:nth-of-type(2){
+          background: pink
+      }
+      li:nth-of-type(3){
+          background: orange
+      }
+      li:nth-of-type(4){
+          background: green
+      }
+      li:nth-of-type(5){
+          background: blue
+      }
+      li>span{
+          display: none
+      }
+        .lias{
+            box-shadow: 0 5px 5px #3b3939;
+        }
+        button{
+            width: 100px;height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="can" width="500" height="500"></canvas>
+    <ul class="all">
+        <li class="lias" data-cole="red"><span>red</span></li>
+        <li data-cole="pink"><span>pink</span></li>
+        <li data-cole="orange"><span>orange</span></li>
+        <li data-cole="green"><span>green</span></li>
+        <li data-cole="blue"><span>blue</span></li>
+    </ul>
+    <button class="qing">清除</button>
+    <script>
+      let can =  document.querySelector(`canvas`)
+      let ull = document.querySelector(`.all`)
+      let  lil =   document.querySelectorAll(`li`)
+      let paint = can.getContext(`2d`)
+      let cActive = document.querySelector(`span`)
+      let qing = document.querySelector(`button`)
+        paint.strokeStyle=`blue`;
+        paint.lineWidth = 1;
+        if('' == cActive.innerText){
+            paint.strokeStyle = 'red'
+        }else{
+            paint.strokeStyle = cActive.innerText
+        }
+        can.onmousedown =function(ev){
+                ev = ev || window.event
+                paint.beginPath();
+                paint.moveTo(ev.clientX - can.offsetLeft,ev.clientY-can.offsetTop);
+            document.onmousemove=function(ev){
+                        ev = ev || window.event
+                        paint.lineTo(ev.clientX-can.offsetLeft,ev.clientY-can.offsetTop);
+                    paint.stroke(); 
+            }    
+            document.onmouseup = function(){
+            document.onmousemove = null;
+            document.onmouseup = null;
+            }  
+         }  
+        ull.onclick =(ev)=>{
+            ev = ev || window.event
+          for(const lli of lil){
+              lli.className = ``
+              if(`LI`== ev.target.nodeName){
+                paint.strokeStyle = ev.target.children[0].innerText 
+                 ev.target.className = 'lias'
+              }else if(`SPAN`== ev.target.nodeName){
+                paint.strokeStyle= ev.target.innerText
+                ev.target.parentNode.className = `lias`
+              }
+          }
+        } 
+        qing.onclick=(ev)=>{
+             ev = ev || window.event
+             paint.beginPath();
+            //  paint.clearRect(ev.clientX - can.offsetLeft,ev.clientY-can.offsetTop,30,50);
+             document.onmousemove=function(ev){
+                 ev = ev || window.event
+                 paint.clearRect(ev.clientX-can.offsetLeft,ev.clientY-can.offsetTop,30,50);
+                 paint.stroke(); 
+            }    
+        }
+    </script>
+</body>
+</html>

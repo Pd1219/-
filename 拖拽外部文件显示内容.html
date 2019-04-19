@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #target{
+            width: 200px;height: 200px;
+            background: #f80;
+            margin: 0 auto
+        }
+        img{
+            width: 200px;height: 200px;
+        }
+       
+    </style>
+</head>
+<body>
+        <div id="target">目标元素</div>
+       <ul id="xian">
+       </ul>
+        <script>
+            var target = document.getElementById('target');
+            // let si = document.querySelector(`#xian`)
+            // 拖拽元素进入时触发
+            target.ondragenter = function () {
+                this.style.background = 'gray';
+                this.innerText = '松开鼠标';
+            }
+            // 拖拽元素离开时触发
+            target.ondragleave = function () {
+                this.style.background = 'blue';
+                this.innerText = '目标元素';
+                
+            }
+            // 拖拽元素进入时连续触发，离开时结束触发
+            target.ondragover = function (ev) {
+                var ev = ev || window.event;
+                //阻止默认事件，否则 ondrop 事件不能触发。
+                ev.preventDefault();
+            }
+            //拖拽元素在在目标元素上释放时触发。必须在 ondragover 中阻止默认事件。
+           
+           
+            target.ondrop = function (ev) {
+                this.style.background = 'blue';
+                var ev = ev || window.event;
+                ev.preventDefault();
+        
+                var fs = ev.dataTransfer.files;
+
+
+                 //递归方法 获取图片
+                 hj(fs,0)
+                function hj(fs,ij){
+                     if(ij == fs.length){       //判断  给个退出递归的条件 
+                        return
+                     }
+                     var ff = new FileReader();
+            //FileReader对象的readAsDataURL方法可以将读取到的文件编码成数据URL.Data URL是一项特殊的技术
+                     ff.readAsDataURL(fs[ij])
+                     ff.onload=function(){
+                       let li = document.createElement(`li`)    //动态生成·li·标签
+                       li.innerHTML = `<img src="${this.result}" alt="">`
+                       document.querySelector('#xian').appendChild(li)
+                       hj(fs,++ij)
+                     }
+                }
+            }
+        </script>
+</body>
+</html>
