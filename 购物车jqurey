@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery3.5.js"></script>
+    <style>
+      div{
+          width: 300px;
+          float: left;
+          margin-right: 10px;
+          text-align: center;
+          border: 1px solid #8cdf2e
+      }
+      h3{
+          width: 300px;height: 30px;
+          color: #df320b
+      }
+      img{
+          width: 300px; 
+      }
+    </style>
+</head>
+<body>
+       <h2>`你购买的数量:0，你购买的总价:0</h2>
+    <script>
+       $.ajax({
+            url:`http://192.168.5.49:3000/list`,
+            type:`get`,
+            dataType:`jsonp`,
+            success:function(er){
+              obj = er.result.list
+              for(let i=0;i<obj.length;i++){
+                    rt(i)
+                }
+            },
+            error:function(){
+            }
+       })
+       /*
+             动态生成元素 然后获取值
+       */
+       function rt(i){
+            odiv = $("<div>")
+            oh1 = $("<h1>")
+            oimg = $("<img>")
+            obutton = $(`<button>`)
+            oinput= $(`<input>`)
+            obuttonr = $(`<button>`)
+            oh3 = $("<h3>")
+            obutton.text(`+`)     
+            obuttonr.text(`-`)
+            oinput.val(`0`)
+            oh1.text(obj[i].productName)
+            oimg.attr('src','http://192.168.5.49:3000/images/'+obj[i].productImage)
+            oimg.css(`width`,`300px`)
+            oh3.text(`￥`+obj[i].salePrice+`.00`)
+            odiv.append(oh1)
+            odiv.append(oimg)
+            odiv.append(obutton)
+            odiv.append(oinput)
+            oinput.attr(`id`,`xian`+i)
+            odiv.append(obuttonr)
+            odiv.append(oh3)
+            $("body").append(odiv)
+            let te = false
+            let value = 0
+            odiv.click(function(){
+                 te = !te
+                 /* for循环 清除多余颜色 */
+                for(let j =0;j<obj.length;j++){   
+                    $(`div`).css(`background`,`#ffff`)
+                }
+                /*            点击变色           */
+                 $(this).css(`background`,te?`#f80`:`#8cdf2e`)
+             })
+
+
+              obutton.click(function(ev){
+                if ($("#xian"+i).val()>=1){
+						ev.stopPropagation()
+					}
+					value ++ 
+					$("#xian"+i).val(value)
+                    obj[i].ca = value
+                 
+                    hj()
+             })
+             obuttonr.click(function(ev){
+                 if($("#xian"+i).val()<=1){
+                     ev.stopPropagation()
+                 }
+                 value --
+                 if(value<0){
+                  value = 0
+                 $(this).parent().css(`background`,`pink`)
+                 }
+                 $("#xian"+i).val(value)
+                 obj[i].ca = value
+                 console.log(obj[i].ca);
+                 hj()
+             })
+              /*
+                      以下是对数据的操作
+              */
+              function hj(){
+                    var can = 0
+                    var zon = 0 
+                    let op =obj.map(function(po){
+                         if(po.ca){
+                             return po.ca
+                         }else{
+                             return 0 
+                         }
+                      })
+                    can = op.reduce(function(a,b){
+                         return a+b
+                    })
+                    console.log(can);
+                    
+                    let bp = obj.map(function(po){
+                        if(po.ca){
+                            return po.ca * po.salePrice
+                        }else{
+                            return 0
+                        }
+                    })
+                    zon = bp.reduce(function(a,b){
+                            return a + b
+                    })
+                    console.log(zon)
+                    $("h2").text(`你购买的数量:`+can+`，你购买的总价:`+zon)
+             } 
+     }
+    </script>
+</body>
+</html>
