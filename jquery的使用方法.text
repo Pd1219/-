@@ -1,0 +1,129 @@
+jQuery框架技术
+编程的范式：
+	函数式
+	面向对象
+每个function代码尽量不要超过100行
+框架：目的简化写javascript一些方法
+四项技术：
+	（1）DOM树的操作
+	（2）事件处理
+	（3）animate
+	 (4)ajax
+框架的版本：3.4.0
+经常同现的版本：2.0 1.8 1.9 2.1
+jquery对网页进行操作的常用方法：
+	1、取元素
+		$(选择器)
+		$指jQuery缩写
+		$(“.p”)把所有类选择器为p全部选出
+		$(“h2”)把所有标签选择器为h2全部选出
+	2、操作属性:
+		css属性 ：
+			$(“h2”).css(键，值)
+			css指的是css属性
+			例：所有的p标签字体颜色为红色
+				字体大小为30px
+			$(“p”).css(‘color’,’red’)
+			$(“p”.css(‘font-size‘，’30px’)
+			query提供链式操作：
+			$(“p”).css(‘color’,’red’).css(‘font-size’,’30px’)
+			$(“p”).css(‘color’)获取p元素的字体颜色
+		html属性：
+			此属性在css中是无法获取的，只能在html标签里设置，比如src href
+			attr获取html标签上的属性
+			$(“img”).attr(‘src’)
+			如果参数是1个是取值，如果参数是两个，是设置值
+			$(“img”).attr(“src”,’a.jpg‘）
+		取标签之间的文字信息：(相当于js中的innerText)
+			text
+		取表单里面元素的value值 ：
+			val()
+	3、简易事件：
+		javascript里onclick
+		jquery里click
+		jquery加载后执行的function
+		简写：（加载后执行）
+			$(function(){
+			});
+		全写:
+			$(document).ready(function(){
+			})
+		例:为所有的button标签加入点击事件，弹出信息
+		$(“button”).click(function(){
+		})
+		注意：没有用=
+		不要这么写：
+		$(“button”).onclick=function(){
+		}
+		js和jquery不要混在一起写
+	query动态创建数据：
+		$(“<button>”)创建一个button
+		相当于js中createElement
+		jquery添加元素 append()
+ajax
+	全称：异步的javascript和xml
+	局部刷新页面的技术
+	xml:可扩展的标记性语言（标签是自定义的）
+	前端 记录数据的一种方式
+	还有另外一种方式：json值对，普遍
+	说明：前端不接触数据库这方面，基于安全性的考虑，后台需要把数据库的内容返回前端来，但返回数据不是大量的数据，因为大量数据会占用网络延时，返回数据是分页码或者是分类性的。返回形式：值对（属性和值是对应的），值对在前端展示的数据格式：xml或者json
+Object:
+		{
+			name:”al”,
+			age:23
+		}
+json:
+		{
+			“name”:”al”,
+			“age”:23
+		}
+加载数据：ajax
+	格式：
+		$.ajax(
+			{
+				url:请求地址，
+				type：’get或者post’请求方式：
+				dataType:’json’接收数据的格式
+				success:function(result){
+				}成功，后面函数指成功后返回的内容，result参数成功调用后返回的后台数据，
+				error:function(result){
+				}
+			}
+		)
+	表单提交的方式：前台给后台传数据，分两种方式：get  post
+
+	1、get方式（1）明文发送，地址栏显示，不安全（2）get只发送文本，有大小限制
+	2、post（1）暗文发送，同时加密，地址栏不显示，安全（3）没有大小限制，可以发视频和图片
+访问的时候出现：
+	同源策略：浏览器所有的网站都只能访问自己网站的内容，不能访问其它网站的数据
+	网站必须做跨域技术，才能去请求其它网站的数据	
+	两种：一种后端，利用cors技术，Access-Control-Allow-Origin
+		一种前端，利用jsonp,可以跨域请求json(前端跨域请求时只能用get方式）
+请求数据然后分解数据:(提取数据）
+统一：奇变偶不变
+	设置一个标志位
+		flag=false
+	点击之后发生取反问题：flag=!flag
+	根据当前的标志位决定当前的元素产生不同的奇变偶不变效果
+	toggle
+掌握的内容
+	1、query加载ajax格式（*********）
+	2、分解
+	3、让一个元素有效
+	4、动态（先有静态，再有动态）一个
+	5、层次化之后循环
+	6、调整 
+	7、功能：点击背景变色，再点还原
+	***8、页面上加上一个输入框和加减按钮，加减功能控制输入框的值 
+	***9、在页面上面显示出所购商品的数量和总价
+概念：
+	1、ajax定义：异步局部刷新技术
+	2、query加载ajax格式
+	3、$的意思
+	4、jquery取元素
+	5、jquery设置属性（css,html)
+	6、jquery取文本（text val)
+	7、query加事件（click格式）
+
+	
+	
