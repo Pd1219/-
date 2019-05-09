@@ -1,0 +1,54 @@
+
+
+## DOM (文档对象模型)
+当网页被加载时，浏览器(JS引擎)会创建页面的文档对象模型（Document Object Model）。
+![](./img/1.gif)
+### DOM功能
+1. JavaScript 能够改变页面中的所有 HTML 元素
+2. JavaScript 能够改变页面中的所有 HTML 属性
+3. JavaScript 能够改变页面中的所有 CSS 样式
+4. JavaScript 能够对页面中的所有事件做出反应
+
+### 获取元素
+1. document.getElementById()
+2. document.getElementsByName()
+3. document.getElementsByClassName()
+4. document.getElementsByTagName()
+5. document.querySelector()
+6. document.querySelectorAll()
+> 以上方法均可返回元素对象或元素对象数组。
+
+
+### 元素对象
+*　element.nodeType
+返回值：
+    如果节点是一个元素节点，nodeType 属性返回 1。
+    如果节点是属性节点, nodeType 属性返回 2。
+    如果节点是一个文本节点，nodeType 属性返回 3。
+    如果节点是一个注释节点，nodeType 属性返回 8。
+
+* element.nodeName 返回标签名称（大写）
+* element.childNodes 获取元素下所有的子节点
+* element.parentNode 
+
+* element.clientHeight
+* element.offsetHeight
+* element.clientWidth
+* element.offsetWidth
+* element.offsetLeft
+* element.offsetTop
+
+
+* element.firstElementChild
+* element.firstChild
+* element.lastElementChild
+* element.lastChild
+* element.nextElementSibling
+* element.nextSibling
+* element.previousElementSibling
+* element.previousSibling
+
+* element.attributes.removeNamedItem() //删除指定属性
+
+
+

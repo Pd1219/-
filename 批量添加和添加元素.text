@@ -1,0 +1,27 @@
+普通添加
+
+<!-- 为ul添加子元素 -->
+<ul id="box"></ul>
+var box = document.getElementById("box"); 
+for(var i=1;i<=100;i  ){
+    var li = document.createElement("li");
+    li.innerHTML = i;
+    box.appendChild(li);
+}
+
+使用文档碎片方式添加
+
+var box = document.getElementById("box"); 
+// 创建文档碎片    
+var fragment = document.createDocumentFragment(); //加碎片
+// 将新元素添加到文档碎片中
+for(var i=1;i<=100;i++  ){
+    var li = document.createElement("li");
+    li.innerHTML = i;
+    fragment.appendChild(li);
+}
+
+//将文档碎片添加到 ul 元素。
+box.appendChild(fragment);
+
+**注意：**在工作中建议使用文档碎片的方式进行批量添加，因为使用box.appendChild()方法添加元素时其实就是直接显示在页面中会对页面渲染，如果是循环添加的话就会不停的渲染。而使用文档碎片fragment.appendChild()只是将元素添加到内存中，并没有直接显示出来，而最后再将fragment文档碎片添加到指定元素进行渲染，这样效率会更高。

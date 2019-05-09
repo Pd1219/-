@@ -1,0 +1,31 @@
+   <  Math (执行数学任务) >
+
+  方法：
+Math.ceil()      对数进行上舍入。
+Math.floor()     进行下舍入
+Math.round()     四舍五入。
+Math.max()       返回最高值。
+Math.min()       返回最低值。
+Math.random()    返回 0 ~ 1 之间的随机数。
+ 
+
+    <  RegExp (正则表达式) >
+ 
+正则对象中方法：
+test()    检索给定字符的值是否和正则表达式匹配返回布尔值。
+exec()    检索字符串中指定的值。返回找到的值，并确定其位置。
+
+验证邮箱：
+  var re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
+  var email = 'li_chao@126.com.122222222225';
+  alert(re.test(email));
+
+去除字符串首尾空格：
+  var str = "    hello javascript  ";
+  var re = /^\s+|\s+$/g;
+  alert("(" + str.replace(re,'') + ")");
+		
+
+
+	
+	

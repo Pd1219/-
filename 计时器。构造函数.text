@@ -1,0 +1,116 @@
+
+## 对象
+
+[https://developer.mozilla.org/zh-CN/docs/](https://developer.mozilla.org/zh-CN/docs/)
+
+## 常用的函数
+1. .call()  // 接收参数    继承
+2. .apply()  // 接收数组
+3. setTimeout()  //计时器
+4. setInterval()  //无限计时器
+5. clearTimeout()     //清除
+6. clearInterval()  //清除
+
+
+### 对象创建
+1. 
+
+let person = new Object();
+   person.name = '小明'
+   person.age = 19;
+
+
+1. 
+
+var man = {
+    name:'小明',
+    age:19,
+    job:function(){    //  动态对象
+        console.log(this.name+' 的工作是学生')
+    }  
+}
+
+> this 表示当前对象
+> new  新建对象
+2. 
+```js
+var person = new Object();
+    person.name = '小明';
+    person.age=19;
+    person.doSome = function(){
+    console.log(">> "+ this.name);
+}
+```
+
+3. 工厂方式
+```js
+function createPerson(name, sex) {
+    //实例化对象
+    var person = new Object();   //person 接受了 new 对象
+        person.name = name;
+        person.age = sex;
+        person.doSome = function () {
+        console.log(">> "  + this.name);
+    }
+     return person;
+}
+    var jie  = createPerson(`小陈`,28,)  //接收值
+      jie.doSome()          //显示动态值
+```
+
+4. 构造函数方式
+```js
+function Person(name, sex) {
+    this.name = name;
+    this.sex = sex;
+    this.doSome = function () {   //动态属性 -> 叫方法
+        console.log("》》 "+  this.name);
+    }
+}
+   var p1 = new Person('小白', 18);
+   p1.doSome()      // 调用显示动态的值
+```  
+
+
+
+
+###检查对象中是否有该属性
+1. in 检查对象中是否有该属性或方法
+> 如果该属性是通过继承得来的也会输出为true
+```js
+console.log('toString' in p1)
+```
+
+2.  hasOwnProperty方法判断的是对象是否自身拥有的，而不是继承得到的
+```js
+console.log(p1.hasOwnProperty('name'))
+console.log(p1.hasOwnProperty('sex'))
+```
+
+### for/in
+```js
+for (var key in p1) {
+    console.log(typeof p1[key])
+}
+```
+
+
+### prototype 属性的使用
+* 添加原型属性时通过 类名 方式添加 `ClassName.prototype.attrName = value`
+* 对象中有属性和 prototype 中属性名称重名，会优先使用对象中的属性。
+
+### 删除对象中属性delete 
+```js
+delete p1.name
+```
+
+
+###
+1. 在方法中，this 表示，this 表示全局对象。
+3. 在函数中，this 该方法所属的对象。
+2. 如果单独使用表示全局对象。
+4. 在事件中，this 表示接收事件的元素。
+5. setTimeout时this 指向全局对象使用箭头函数时this可以指向程序的上下文，（就是定义时所在的对象，而不是使用时所在的对象）
+
+
+

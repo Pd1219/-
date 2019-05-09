@@ -1,0 +1,127 @@
+ ### js canvas 绘制图形
+
+
+HTML5 中引用画布标签<canvas></canvas>，配合JS绘制图形。
+这里需要注意具有绘制功能的是JS而<canvas></canvas>承载绘画的画布。
+<canvas> 标签对IE8及以下低版本浏览器不支持，不能正常显示。
+通常情况下在 <canvas> 标签内部添加提示增加用户体验。
+当前支持 <canvas> 的浏览器并不会显示 <canvas> 标签内部的提示。
+
+--------------------------------------------->
+通常情况下在 <canvas> 标签内部添加提示增加用户体验。
+<canvas id="can" width="400" height="400" >
+</canvas>
+--------------------------------------------->
+
+<canvas> 组件默认宽 300px 高 150px 。如果要设置宽高通常使用标签本身的 width、height 属性而不用 CSS 样式。
+--------------------------------------------->
+canvas.getContext(‘2d’)：
+
+通过 canvas.getContext(‘2d’) 获取上下文对象，这个上下文对象可以理解为画笔，当然这个画笔只能在特定的画布上绘画。
+```js
+var canvas = document.getElementById('can');
+var paint = canvas.getContext('2d');
+```
+--------------------------------------------->
+画笔设置。
+
+* paint.fillStyle = ‘red’; 画笔绘制实心图案时颜色。
+* paint.strokeStyle = ‘blue’; 画笔绘制空心图案时颜色。
+* paint.lineWidth = 10; 画笔宽度。
+
+* paint.lineJoin = ‘round’; 多边形端点样式：
+>round 圆角
+>bevel 斜角
+>miter 默认
+--------------------------------------------->
+* paint.lineCap = ‘round’; 直线端点样式:
+>butt 默认
+>round 圆角
+>square 高度多出宽度的 1/2 值
+--------------------------------------------->
+* paint.fillRect(x,y,width,height); 实心方块。
+
+* paint.rotate(45*Math.PI/180); 围绕 0 点旋转，参数为弧度。
+
+* paint.scale(1,2); 根据宽度的缩放比进行缩放。
+
+* paint.strokeRect(x,y,width,height); 空心方块。
+
+* paint.translate(x,y); X,Y 0点偏移。
+
+--------------------------------------------->
+* paint.drawImage(imgObj,x,y,imgWidth,imgHeight); 绘制图片。
+```js
+var mImg = new Image();
+mImg.src = './img/gg.png';  
+ // 要加上`onload`加载完毕后 才能显示图片    
+mImg.onload = function(){    
+paint.drawImage(this,0,0);
+}
+```
+--------------------------------------------->
+
+* paint.strokeText(‘text’,x,y); 绘制空心文本。
+
+* paint.fillText(‘text’,x,y); 绘制实心文本。
+
+* paint.font = ‘30px impact’; 文字大小,类型。
+
+* paint.textAlign = ‘left’; 文字左右对齐
+
+* paint.textBaseline = ‘bottom’; 文字上下对齐方式，top middle bottom。
+
+* paint.shadowOffsetX = 10; 文字阴影 X 偏移。
+
+* paint.shadowOffsetY = 10; 文字阴影 Y 偏移。
+
+* paint.shadowColor=‘red’; 文字阴影颜色。
+
+* paint.shadowBlur = 2; 文字阴影模糊。
+
+##绘制路径相关设置
+* paint.beginPath(); 开始路径：
+* paint.moveTo(x,y); 路径第一个点：
+* paint.lineTo(200,200); 移动到下一个点：
+* paint.closePath(); 闭合路径：
+* paint.stroke(); 以线的方式绘制：
+* paint.fill(); 以填充的方式绘制：
+* paint.rect(100,100,100,100); 绘制矩形：
+--------------------------------------------->
+* paint.clearRect(0,0,canvas.width,canvas.height); 清除画布：
+* paint.arc(100,100,15,0,90*Math.PI/180,false); 绘制圆形
+>参数1: X坐标。
+>参数2: Y坐标。
+>参数3：半径。
+>参数4: 起始弧度。（角度 * Math.PI / 180）
+>参数5：结束弧度。
+>参数6：方向,true逆时针，false顺时针。
+--------------------------------------------->
+##路径绘制时画笔的设置与恢复：
+* paint.save();
+* paint.restore();
+
+ #实例：
+ --------------------------------------------->
+鼠标画线：
+```js
+var canvas = document.getElementById('can');
+var paint = canvas.getContext('2d');
+canvas.onmousedown = function(ev){
+var ev = ev || window.event;
+paint.beginPath();
+paint.moveTo(ev.clientX-canvas.offsetLeft,ev.clientY - canvas.offsetTop);
+
+document.onmousemove = function(ev){
+    var ev = ev || window.event;
+    paint.lineTo(ev.clientX-canvas.offsetLeft,ev.clientY - canvas.offsetTop);
+
+    paint.stroke();
+}
+document.onmouseup = function(){
+document.onmousemove = null;
+document.onmouseup = null;
+}
+}
+```
+--------------------------------------------->

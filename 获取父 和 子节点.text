@@ -1,0 +1,21 @@
+#  父级节点
+
+* Element.parentNode 当前节点的父节点。
+* Element.offsetParent 获取当前节点的祖先节点。标准浏览器在获取祖先节点时有两种情况：1. 如果所有父级节点都没有定位，那么获取到的祖先节点就是<body>。2. 如果父级节点中有定位(固定、相对、绝对)，那么获取的的节点就是离他最近的定位节点。
+
+#  子节点方式一
+获取子节点和兄弟节点方式一：
+Element.childNodes 获取子节点。
+Element.firstChild 获取第一个子节点。
+Element.lastChild 获取最后一个子节点。
+Element.nextSibling 获取当前节点的下一个兄弟节点。
+Element.previousSibling 获取当前节点的上一个兄弟节点。
+注意以上5个属性在标准浏览器《会获取空白节点》（空白节点其它也是文本节点）而在IE5/6/7/8下则不会获取空白节点
+
+##获取子节点和兄弟节点方式二
+Element.children 获取子节点。
+Element.firstElementChild 获取第一个子节点。
+Element.lastElementChild 获取最后一个子节点。
+Element.nextElementSibling 获取当前节点的下一个兄弟节点。
+Element.previousElementSibling 获取当前节点的上一个兄弟节点。
+以上5个属性在使用的时候《不会获取空白节点》。但是要注意除了children支持所有浏览器外其属性是不支持IE5/6/7/8浏览器的。

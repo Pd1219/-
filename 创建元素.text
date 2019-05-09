@@ -1,0 +1,33 @@
+
+## 创建元素节点
+* document.createElement() 创建元素节点
+* document.createTextNode() 创建文本节点
+* document.createAttribute() 创建属性节点
+* document.createComment() 创建注释节点
+* element.innerHTML 设置或者返回元素的内容
+
+## 添加节点
+* element.appendChild() 为元素添加一个新的子元素
+* element.insertBefore() 现有的子元素之前插入一个新的子元素
+* element.setAttribute() 设置或者改变指定属性并指定值
+* element.setAttributeNode() 设置或者改变指定属性节点
+
+
+## 删除节点
+* element.removeAttribute() 从元素中删除指定的属性
+* element.removeAttributeNode() 删除指定属性节点并返回移除后的节点
+* element.removeChild() 删除一个子元素
+
+## 替换
+* element.replaceChild() 替换一个子元素
+
+## 克隆
+* element.cloneNode() 克隆某个元素
+
+### 序列化JSON对象
+* JSON.stringify(obj)
+### 反序列化
+* JSON.parse(objStr)
+
+
+

@@ -1,0 +1,88 @@
+
+## 继承
+
+```js
+function Human(name,age){
+    this.name = name
+    this.age = age
+    this.say = function(){
+        console.log(`${this.name} 年龄 ${this.age}`)
+    }
+}
+Human.prototype.color = '白'
+Human.prototype.work = function(){
+    console.log('work')
+}
+
+function Man(name,age,job){
+    //构造函数的伪装
+    Human.call(this,name,age)
+    this.job = job
+    this.say = function(){
+        console.log(`${this.name} 年龄 ${this.age} 职业${this.job}`)
+    }
+}
+//原型继承
+Man.prototype = Human.prototype
+
+```
+### instanceof
+```js
+    obj instanceof Object
+```
+1. instanceof 可以检测该对象是不是该类的子类（实例化的）
+
+
+## this
+1. 在函数中，this 表示，this 表示全局对象。
+2. 在方法中，this 该方法所属的对象(new 实例化)。
+3. 如果单独使用表示全局对象。
+4. 在事件中，this 表示接收事件的元素。
+5. setTimeout时this 指向全局对象使用箭头函数时this可以指向程序的上下文，（就是定义时所在的对象，而不是使用时所在的对象）
+
+
+## 命名空间
+* 命名空间就是为了解决命名空间污染（变量名称重复定义）的问题。
+
+
+## 数组
+
+### 数组创建
+```js
+let array = []
+let array1 = [1,2,3,45,56,7,8,] //
+let array2 = new Array()
+let array3 = new Array(9) //参数为数组
+let array4 = new Array(1,2,3,4,5,76,78,8) //参数用来填充数组中的元素
+```
+* array.length 表示数组的长度，从1开始计数
+* 访问数组可以使用数组的下标，下标从0开始，下标一定是连续的。
+* array.length = 19 不建议给length属性赋值。
+* array.length = 0 清空数组
+
+
+
+### 数组中添加元素
+
+### 遍历数组
+1. for/in 迭代数组下标
+2. for/of 迭代数组元素
+> for/of可迭代对象（包括 Array，Map，Set，String，TypedArray，arguments 对象等等）上创建一个迭代循环.
+### 数组中常用方法
+1. concat() 数组连接
+2. copyWithin(target,start,end) target:粘贴到的下标地址， start:复制开始下标，end：复制结束下标（不包括此下标元素）。
+3. fill()
+3. array.forEach((target)=>{})   // 回调  target:必要属性        
+4. isArray() //判断对象是否为数组。                       
+5. indexOf() //搜索数组中的元素，并返回它所在的位置。
+6. join()   //  把数组的所有元素放入一个字符串。
+7. pop()    //	删除数组的最后一个元素并返回删除的元素。
+8. push()   //  向数组的末尾添加一个或更多元素，并返回新的长度
+
+### 多维数组
+
+
+
+
+
+

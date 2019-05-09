@@ -1,0 +1,97 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              《   HTML DOM  事   件    》
+onload    会在页面或图像加载完成后立即发生
+onunload  在用户退出页面时发生。
+onscroll  在元素滚动条在滚动时触发
+    
+   《       鼠  标  事 件          》
+
+onclick       鼠标点击
+ondblclick    鼠标双击
+onmousedown   鼠标按下
+onmouseup     鼠标松开
+onmouseenter  当鼠标移动到元素上时触发。（不支持冒泡）	
+onmouseleave  当鼠标移出元素时触发 （不支持冒泡）
+onmouseover   鼠标移到某元素之上。（支持冒泡）
+onmouseout    鼠标从某元素移开 （支持冒泡）
+onmousemove   鼠标被移动。 （不停）
+	
+	
+  《       键   盘  事 件          》
+
+onkeydown     某个键盘按键被按下。	
+onkeypress    某个键盘按键被按下并松开。
+onkeyup       某个键盘按键被松开。
+
+
+  《       表   单  事 件          》
+
+onsubmit      表单提交时触发。
+onreset       表单重置时触发
+onblur        失去焦点
+onfocus       获取焦点
+
+  《       绑   定  事 件          》
+
+1.attachEvent(参数1,参数2)  不支持 标准浏览器  和IE11.
+
+参数一：事件名称
+参数二：事件回调函数
+参数三：boolean值,为true时捕获，false时冒泡。
+
+2.addEventListener(参数1,参数2，参数3)
+但在这个方法中事件要去掉 on
+   
+
+《      取  消  绑   定  事 件        》
+
+
+1.xx.onclick = null    取消普通事件
+2.attachEvent()绑定事件，使用 detachEvent()取消事件绑定。
+3.addEventListener()绑定事件，使用removeEventListener()取消事件绑定
+兼容性写法：
+function delEvent(obj,eventName,callback){
+   if(obj.removeEventListener){
+         obj.removeEventListener(eventName,callback,false);
+     }else{
+          obj.detachEvent('on'+eventName,callback);
+       }
+ }
+
+《      阻  止  事  件  冒  泡        》
+
+阻止事件冒泡有两种方法：
+
+1.event.cancelBubble = true;
+2.event.stopPropagation();
+注意：IE5/6/7/8不支持这种写法
+
+divs[i].onclick = function(ev){
+    var event = ev || window.event;
+    // event.cancelBubble = true;
+    event.stopPropagation();//IE5/6/7/8不支持
+    alert(this.className);
+}
+
+3、阻止默认事件：
+   e.preventDefault()
+
+    《      事   件   对    象        》
+
+event 对象：连接事件与事件细节的桥梁。其实就是鼠标事件中鼠标在屏幕的哪个位置触发的该事件，键盘事件中你按下的是哪个按钮触发的该事件等这些事件的细节。
+
+event 兼容性写法：
+
+document.onclick = function (event) {
+    var ev = event || window.event;
+}
+event.target：事件源，(哪个元素触发的事件)IE5/6/7/8不支持该属性。
+event.srcElement：事件源，IE5/6/7/8支持该属性。
+
+鼠标事件中的 event 对象：
+event.clientX :鼠标所在的X轴位置,可视窗口区域的，窗口可视区域最左侧为0坐标。
+event.clientY :事件在触发时鼠标所在的Y轴位置
+event.pageX   :鼠标相对于整个页面窗口的X轴位置。
+event.pageY   :鼠标相对于整个页面窗口的Y轴位置。
+
+键盘事件中的 event 对象
+event.keyCode 可以获取按下的按键是什么，返回的是一个数字。键盘上的每一个按键就有一个独一无二的数字编码。
