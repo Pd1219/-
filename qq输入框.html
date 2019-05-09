@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding: 0; margin: 0;}
+    textarea{outline: none; border: none;}
+    ul{ list-style: none; }
+    .clear:after{content: '';display: block;clear: both;}
+    .clear{zoom:1; }
+    .qqWindow{
+        width: 700px; height: 600px;
+        border: 1px solid gray;
+        position: fixed;top: 50%; left: 50%;
+        margin-left: -350px; margin-top: -300px;
+        border-radius: 5px; 
+        box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.445);
+    }
+    .top{
+        height: 50px; 
+        /* background: blue; */
+    }
+    .top>h1{
+        font-size: 16px; text-align: center; color: #333;
+        line-height: 50px;height: 50px;
+    }
+    .content{
+        height: 550px;
+        position: relative;
+        box-sizing: border-box;
+        border-top: 1px solid gray;
+    }
+    .contentLeft{
+        width: 75%;
+        height: 550px;
+        /* background: orange; */
+        position: absolute;
+        box-sizing: border-box;
+        border-right: 1px solid gray;
+    }
+    .contentRight{
+        width: 25%;
+        height: 550px;
+        /* background: blue; */
+        position: absolute;top: 0;right: 0;
+        box-sizing: border-box;
+    }
+    .contentRight li{
+        text-align: center;
+        margin-bottom: 2px; padding: 6px;
+        font-size: 14px; color: #999;
+        background: rgb(223, 222, 222);
+        cursor: pointer;
+    }
+    .contentRight li:hover{
+        background: rgba(143, 143, 236, 0.411);
+        color: #fff;
+    }
+    .contentRight li.liActive{
+        background: #999;
+        color:#fff;
+    }
+    .contentRight>h2{
+        text-align: center;
+        font-size: 12px; color: #999;
+        padding: 10px 0;
+    }
+
+    .chatContent{
+        box-sizing: border-box;
+        height: 400px;
+        width: 100%;
+        overflow: auto;
+        border-bottom: 1px solid gray;
+    }
+    .chatArea{
+        height: 100px;
+    }
+    .chatArea>textarea{
+        height: 100px; width: 100%;
+        resize: none;
+        padding: 6px 10px;
+        box-sizing: border-box;
+    }
+    .btns{
+        float: right;
+        margin-right: 20px;
+    }
+    .btns>button{
+        padding: 6px 16px;
+        background: #fff;
+        border: 1px solid gray;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .chatItem{
+        margin-bottom: 20px;
+    }
+    .chatItem>.chatTop{
+        padding: 6px 10px;
+        font-size: 16px; color: #999;
+    }
+    .chatItem>.chatMsg{
+        font-size: 14px; color: #333;
+        padding: 6px 10px;
+        text-indent: 2em;
+    }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="qqWindow">
+        <div class="top">
+            <h1>泽林190304前端班</h1>
+        </div>
+        <div class="content">
+            <div class="contentLeft">
+                <!-- 信息展示 -->
+                <div class="chatContent">
+                    <ul class="clear chatList">
+                        <!-- <li class="chatItem">
+                            <div class="chatTop">
+                                <span class="chatUserName">小明</span>
+                                <span class="sendTime">9:30:26</span>
+                            </div>
+                            <div class="chatMsg">
+                                    extarea 对象代表 HTML 表单中的一个文本域 (text-area)。
+                                    HTML 表单的每一个  标签，都能创建一个Textarea 对象。
+                                    您可以通过索引相应表单的元素数组来访问某个 Textarea 对象，或者使用 getElementById()。
+                            </div>
+                        </li>
+                         -->
+
+                    </ul>
+                </div>
+                <!-- 信息输入 -->
+                <div class="chatArea clear">
+                    <textarea id="msg" ></textarea>
+                    <div class="btns">
+                        <button>取消</button>
+                        <button class="send">确定</button>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- 群成员 -->
+            <div class="contentRight">
+                <h2>群成员</h2>
+                <ul id="userList">
+                    <li class="liActive">小明1</li>
+                    <li>小明2</li>
+                    <li>小明3</li>
+                    <li>小明4</li>
+                    <li>小明5</li>
+                    <li>小明6</li>
+                    <li>小明7</li>
+                    <li>小明8</li>
+                    <li>小明9</li>
+                    <li>小明10</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        let userList =  document.querySelector('#userList')
+        let send =  document.querySelector('.send')
+
+        send.onclick = function(){
+            let liActive = document.querySelector('.liActive')
+            let chatList = document.querySelector('.chatList')
+            let msg = document.querySelector('#msg')
+            let userName = liActive.innerText //用户名称
+            let date = new Date() //日期
+            let time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+            let info = msg.value //用户输入信息
+            if(info == ''){
+                alert('消息为空')
+                return
+            }
+            let sendMsgStr = `
+            <li class="chatItem">
+                <div class="chatTop">
+                    <span class="chatUserName">${userName}</span>
+                    <span class="sendTime">${time}</span>
+                </div>
+                <div class="chatMsg">${info}</div>
+            </li>
+            `
+            chatList.innerHTML += sendMsgStr
+            
+
+            msg.value = ''
+        }
+
+        userList.onclick =function(ev){
+            ev = ev || window.event
+            // console.log(ev.target);
+            // let liActive = document.querySelector('.liActive')
+            // liActive.className = ''
+            let lis =  document.querySelectorAll('#userList>li')
+            for(const li of lis){
+                li.className = ''
+            }
+            ev.target.className = 'liActive'
+        }
+
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #mu{
+        width: 200px;height: 200px;
+        background: #f80;
+    }
+    #tou{
+        width: 100px;height: 100px;
+        background: red;
+        margin-top: 100px;
+    }
+        </style>
+</head>
+<body>
+    <div id="mu"></div>
+    <div id="tou" draggable="true">8554</div>
+    <script>
+      let biao =  document.querySelector(`#mu`)
+       let bu =  document.querySelector(`#tou`)
+       
+      bu.ondragstart = function(ev){
+         //firefox火狐浏览如果要进行拖拽操作必须设置 event 中 dataTransfer 对象的 setData(‘key’,“value”) 方法。
+        var ev = ev || window.event;
+      //传递数据给目标元素
+        ev.dataTransfer.setData('k1','一个测试数据');   //
+
+          this.style.background = `#eeee`;    // 拖拽开始时触发
+      }
+      bu.ondragend = function(ev){
+          this.style.background = `#f40`      // 拖拽结束触发
+      }
+      bu.ondrag = function(ev){                // 拖拽时连续触发
+          console.log(`正`);
+      }
+      biao.ondragenter = function(ev){         // 拖拽元素进入时触发
+        this.style.background = `#eeee`;    
+      }
+      biao.ondragleave = function(ev){         // 拖拽元素离开时触发
+        this.style.background = `#854f`
+      }
+      biao.ondragover = function(ev){          // 拖拽元素进入时连续触发，离开时结束触发
+         console.log(`-----------`);       
+
+        var ev = ev || window.event;      //阻止默认事件，否则 ondrop 事件不能触发。
+         ev.preventDefault()
+      }
+      biao.ondrop = function(ev){      // 拖拽元素在在目标元素上释放时触发。必须在 ondragover 中阻止默认事件。
+          ev.dataTransfer.getData('k1')
+          console.log(`常`);
+      }
+
+    </script>
+</body>
+</html>

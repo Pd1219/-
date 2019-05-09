@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    #addList,#addList th,#addList td{
+        border: 1px solid gray;
+    }
+    #addList{
+        border-collapse: collapse;
+        margin-top: 50px;
+    }
+    #addList td,#addList th{
+        padding: 5px 10px 6px;
+    }
+    #addList th{
+        background: rgb(219, 218, 218);
+    }
+    #addList tr>td:first-child{
+        background: rgb(219, 218, 218);
+        color: #fff; font-size: 12px;
+    }
+
+    </style>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <table id="addList">
+        <thead>
+            <tr>
+                <th></th>
+                <th>姓名</th>
+                <th>电话</th>
+                <th>微信</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody id="tbobdy">
+            <!-- <tr>
+                <td>1</td>
+                <td>小明</td>
+                <td>15888884444</td>
+                <td>xhel_ehlasdf</td>
+                <td>这家伙很懒，什么都没有留下</td>
+            </tr> -->
+        </tbody>
+    </table>
+    <script>
+        document.getElementById('btn').onclick = function(){
+            let list = []
+            let table = document.getElementById('addList')
+            let oldTbody = document.getElementById('tbobdy')
+
+            //获取数据
+            list =  getData()
+            //创建表格内容（数据也会填充到行中）
+            let newTbody = createTBody(list)
+            // table.appendChild(tbody)
+            table.replaceChild(newTbody, oldTbody)
+            // console.log(tbody)
+            
+
+        }
+
+        function createTBody(list){
+            let tbody = document.createElement('tbody')
+            tbody.id = 'tbobdy'
+            for(let i=0; i<list.length; i++){
+                // console.log(list[i].name)
+                let tr =  document.createElement('tr')
+                tr.innerHTML = `
+                <td>${i + 1}</td>
+                <td>${list[i].name}</td>
+                <td>${list[i].pNumber}</td>
+                <td>${list[i].wx}</td> 
+                <td>${list[i].desc}</td>   
+                `
+                tbody.appendChild(tr)
+            }
+            return tbody;
+        }
+
+        //获取用户数据
+        function getData(){
+            let listData =[] 
+            for(let i=0; i<50; i++){
+               let pd =  new PData(`小明${i}`,199234535,'xdfdf','这家伙很懒，什么都没有留下')
+               listData[listData.length]=pd
+            }
+            return listData
+        }
+
+
+        function PData(name, pNumber, wx, desc){
+            this.name = name
+            this.pNumber = pNumber
+            this.wx = wx
+            this.desc = desc
+        }
+
+
+        
+    </script>
+</body>
+</html>

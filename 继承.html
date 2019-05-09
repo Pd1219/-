@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Person(name, hao) {
+            this.name = name;
+            this.hao = hao;
+            this.doSome = function () {
+                console.log("----> " + this.name + this.hao + this.job+ this.coll);
+            }
+        }
+         Person.prototype.coll = `和美女`
+
+        function Xiao(name, hao,job) {
+            Person.call(this,name,hao)
+            this.job = job
+        }
+        Xiao.prototype = Person.prototype
+        let a1 = new Xiao(`小王`,29,`在跑步`)
+         a1.doSome()
+
+         document.write(Date());
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

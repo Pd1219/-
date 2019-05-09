@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+</head>
+<body>
+    
+     <input type="number" placeholder="请输入数字" id="shu">
+     <span id="zui"></span>
+     <button type="submit" id="suan">点击换算</button>
+
+    <script>
+       var shu =  document.getElementById("shu")
+       var zui =  document.getElementById("zui")
+       var suan=  document.getElementById("suan")
+
+       suan.onclick = function(){
+            zui.innerText = ` `
+            let value = shu.value
+                value = parseInt(value)      // 转换成没有小数点的数字
+         
+             if(isNaN(value)){     //isNaN 非数字
+                  alert(`非法字符`)   // alert 弹窗
+               }else {
+                if(0>=value){
+                    alert(`请输入大于零的数字`)
+                }
+                else{
+                    let k = guo(value)
+                    zui.innerText = k
+                   }
+               }
+          }
+
+        function guo(n1){
+             var jie = 1 
+             for(var i=1;i<=n1;i++){
+                  jie = i*jie
+                }     
+                return jie
+           }
+              var j = guo(5)
+              
+
+        </script>
+</body>
+</html>

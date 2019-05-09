@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            #can{
+                 border: 1px solid #f80;
+                }
+        </style>
+</head>
+<body>
+        <canvas id="can" width="1000" height="1000">
+                <span></span>
+        </canvas>
+        <script>
+            let cana = document.querySelector(`canvas`)
+            let paint = cana.getContext('2d');
+             paint.fillStyle = `red`;
+             paint.strokeStyle = `blue`;
+             paint.lineWidth = 1;
+             paint.beginPath();
+             paint.moveTo(170,434);
+             paint.lineTo(435,434);
+             paint.lineTo(520,181);
+             paint.lineTo(603,434);
+             paint.lineTo(870,434);
+             paint.lineTo(657,595);
+             paint.lineTo(739,847);
+             paint.lineTo(520,694);
+             paint.lineTo(305,847);
+             paint.lineTo(383,595);
+             paint.closePath();
+             paint.stroke();
+            
+        </script>
+</body>
+</html>

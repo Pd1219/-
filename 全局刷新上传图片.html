@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!--   在form表单内 写上值就为全局 -->
+		<form action="http://192.168.4.233:3000/uploadimg" method="post" enctype="multipart/form-data">
+			上传文件：<input type="file" name="imgfile"/><br/>
+			<img style="width:100px;height:200px" src=""/>
+			<textarea  cols=40 rows=10></textarea>
+			<button type="submit">上传</button>
+			
+		</form>
+		<script>
+			var inputs=document.querySelector('input')
+			var test=document.querySelector("textarea")
+			var imgs=document.querySelector("img")
+			inputs.onchange=function(){  //input 事件 会在域的内容改变时发生
+					console.log(inputs)
+					console.log(inputs.files); //files  是显示客户端文件的原名称
+
+					file=inputs.files[0]
+					if (file.name.indexOf("png")){
+						reader=new FileReader()  // new FileReader() 读取文件的内容
+						reader.readAsDataURL(file)
+						reader.onload=function(){ //onload 事件在页面或图像加载完成后立即发生
+							imgs.src=reader.result
+						}
+					}else{
+						console.dir(file)
+						reader=new FileReader()
+						console.dir(reader)
+						reader.readAsText(file)
+						reader.onload=function(){  //onload 事件在页面或图像加载完成后立即发生
+						test.innerText=reader.result
+						}
+					}
+					
+			}
+		
+		</script>
+	</body>
+</html>

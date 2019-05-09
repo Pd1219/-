@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        width: 600px;height: 500px;
+        border: 1px solid #f80;
+    }
+    div:nth-of-type(1){
+        background: red
+    }
+    div:nth-of-type(2){
+        background: pink;
+    }
+    div:nth-of-type(3){
+        background: lawngreen
+    }
+    div:nth-of-type(4){
+        background: fuchsia;
+    }
+    div:nth-of-type(5){
+        background: teal
+    }
+    button{
+        width: 100px;height: 30px;
+        text-align: center;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+    }
+    </style>
+</head>
+<body>
+    <button id="top">top</button>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+  <script>
+    let too = document.querySelector(`#top`)
+    window.onscroll=()=>{          //文件滚动
+     if( 200 < getScrollY()){
+         too.style.display = `block`     //显示
+     }else{
+         too.style.display = `none`      //隐藏
+     }
+    }
+    too.onclick=()=>{
+          setScrollY(0)
+    }  
+        //获取兼容性写法：
+        function getScrollY(){
+        return window.pageYOffset || document.documentElement.scrollTop;
+    }    
+        //设置兼容性写法：
+        function setScrollY(num){       
+        document.documentElement.scrollTop = document.body.scrollTop = num;
+       }
+   
+   
+
+
+  </script>
+</body>
+</html>
